@@ -10,7 +10,7 @@ Currently the editor supports the following:
   * Lyric changes in .lrc file
 * Offset + Movieoffset reload on restart, instead of from song select.
 
-I should stress here that this is -**_not_**- intended for actual playing. The changes made here may have implications in other parts of the game I'm unaware of, no one should expect to have a 100% quality-assured consistent product for hours of play. On that note, be aware that if you (for some reason) decide to use this, all code is provided AS-IS. With no expectation of support and/or maintenance. This is a strictly unofficial build of OpenTaiko, and no support requests will bet met with response. 
+I should stress here that this is -**_not_**- intended for actual playing. The changes made here may have implications in other parts of the game I'm unaware of, no one should expect to have a 100% quality-assured consistent product for hours of play. On that note, be aware that if you (for some reason) decide to use this, all code is provided AS-IS. With no expectation of support and/or maintenance. This is a strictly unofficial build of OpenTaiko, and no support requests will be met with response. 
 
 For the Official and supported distribution of OpenTaiko: https://github.com/0auBSQ/OpenTaiko
 
