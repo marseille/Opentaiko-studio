@@ -4255,8 +4255,8 @@ namespace TJAPlayer3
 
         public void t演奏やりなおし()
         {
-			TJAPlayer3.DTX.t全チップの再生停止とミキサーからの削除();
-            this.t数値の初期化( true, true );
+            TJAPlayer3.DTX.t全チップの再生停止とミキサーからの削除();
+            this.t数値の初期化(true, true);
             this.actAVI.tReset();
             this.actPanel.t歌詞テクスチャを削除する();
             for (int i = 0; i < 2; i++)
@@ -4265,23 +4265,34 @@ namespace TJAPlayer3
                 this.actPlayInfo.NowMeasure[i] = 0;
             }
             TJAPlayer3.stage演奏ドラム画面.On活性化();
-            for( int i = 0; i < TJAPlayer3.ConfigIni.nPlayerCount; i++ )
+            for (int i = 0; i < TJAPlayer3.ConfigIni.nPlayerCount; i++)
             {
-                this.chip現在処理中の連打チップ[ i ] = null;
+                this.chip現在処理中の連打チップ[i] = null;
                 this.actChara.b風船連打中[i] = false;
                 this.actChara.bマイどんアクション中[i] = false;
                 this.actChara.アクションタイマーリセット(i);
             }
             this.bPAUSE = false;
 
-        //henryk
-        //(even weirder than before) Apparently the movie offset is just movie offset....times 2. 
-        //
-        //Apparently chip #5 (index 4) in the list of 400+ is the chip that controls the movie
+            //henryk
+            //(even weirder than before) Apparently the movie offset is just movie offset....times 2. 
+            //
+            //The chip for movieoffset is seemingly random. It usually is #5 but apparently can vary. It at least 
+            //appears to be consistently less than Chip #11
+            //
+            //Setting the wrong chip screws up other stuff, like the actual audio offset sometimes. 
+            //So check the first 10 indicies for the chip with channel #84 (0x54) . This is the one we want.
 
-        CDTX updated = new CDTX(TJAPlayer3.DTX.strファイル名の絶対パス, true, 1.0, 0, 0, 0, true, TJAPlayer3.stage選曲.n確定された曲の難易度[0]); 
-        TJAPlayer3.DTX.listChip[4].n発声時刻ms = updated.get_movieoffset() * 2; 
+            CDTX updated = new CDTX(TJAPlayer3.DTX.strファイル名の絶対パス, true, 1.0, 0, 0, 0, true, TJAPlayer3.stage選曲.n確定された曲の難易度[0]);
 
+            for (int i = 0; i < 11; i++)
+            {
+                CDTX.CChip chip = TJAPlayer3.DTX.listChip[i];
+                if(chip.nチャンネル番号 == 84){
+                    TJAPlayer3.DTX.listChip[i].n発声時刻ms = updated.get_movieoffset() * 2;
+                    break;
+                }
+            }
         }
 
         public void t停止()
