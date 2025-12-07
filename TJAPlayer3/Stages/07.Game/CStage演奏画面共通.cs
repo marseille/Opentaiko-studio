@@ -4283,16 +4283,20 @@ namespace TJAPlayer3
             //Setting the wrong chip screws up other stuff, like the actual audio offset sometimes. 
             //So check the first 10 indicies for the chip with channel #84 (0x54) . This is the one we want.
 
-            CDTX updated = new CDTX(TJAPlayer3.DTX.strファイル名の絶対パス, true, 1.0, 0, 0, 0, true, TJAPlayer3.stage選曲.n確定された曲の難易度[0]);
-
-            for (int i = 0; i < 11; i++)
+            if (TJAPlayer3.DTX.listAVI.Count() > 0)
             {
-                CDTX.CChip chip = TJAPlayer3.DTX.listChip[i];
-                if(chip.nチャンネル番号 == 84){
-                    TJAPlayer3.DTX.listChip[i].n発声時刻ms = updated.get_movieoffset() * 2;
-                    break;
+                CDTX updated = new CDTX(TJAPlayer3.DTX.strファイル名の絶対パス, true, 1.0, 0, 0, 0, true, TJAPlayer3.stage選曲.n確定された曲の難易度[0]);
+
+                for (int i = 0; i < 11; i++)
+                {
+                    CDTX.CChip chip = TJAPlayer3.DTX.listChip[i];
+                    if (chip.nチャンネル番号 == 84)
+                    {
+                        TJAPlayer3.DTX.listChip[i].n発声時刻ms = updated.get_movieoffset() * 2;
+                        break;
+                    }
                 }
-            }
+            }            
         }
 
         public void t停止()
